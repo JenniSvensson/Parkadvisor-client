@@ -41,8 +41,12 @@ export default function Homepage() {
             <CardColumns>
                 {parks && parks.map(park => {
                     return (
-                        <PreviewCard title={park.title} />
-
+                        <PreviewCard
+                            title={park.title}
+                            description={park.description}
+                            imageUrl={park.imageUrl}
+                            country={park.country}
+                            type={park.type} />
                     );
                 })}
 
