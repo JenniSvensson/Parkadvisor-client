@@ -1,5 +1,5 @@
 import axios from "axios";
-import { selectUser } from "../user/selectors"
+import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { setMessage } from "../appState/actions";
 
@@ -40,6 +40,7 @@ export const fetchParksSuccess = parks => ({
 });
 
 //ADD PARK
+
 export function addPark(title, description, imageUrl, country, type, user) {
     try {
         return async function thunk(dispatch, getState) {
@@ -64,5 +65,3 @@ export function addPark(title, description, imageUrl, country, type, user) {
         console.log(error);
     }
 }
-
-
