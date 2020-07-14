@@ -18,21 +18,20 @@ export const fetchParksSuccess = (artworks) => ({
   payload: artworks,
 });
 
-export function addPark(title, instructions, imageUrl, country, type, user) {
+export function addPark(title, description, imageUrl, country, type, user) {
   try {
-    const id = parseInt(user.id);
     return async function thunk(dispatch, getState) {
+      const user = getState().user;
       const response = await axios.post(
         // API endpoint:
-        `${apiUrl}/endPoint`,
+        `${apiUrl}/park`,
         // Data to be sent along:
         {
           title: title,
-          instructions: instructions,
-          imageUrl: imageUrl,
+          description: description,
+          image: imageUrl,
           country: country,
           type: type,
-          userId: id,
         },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
