@@ -19,7 +19,7 @@ export default function CreatePark() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log("form input: ", title, description, imageUrl, country, type);
-    dispatch(addPark(title, description, imageUrl, country, user));
+    dispatch(addPark(title, description, imageUrl, country, type));
 
     //reset form
     setTitle("");

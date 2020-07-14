@@ -42,28 +42,30 @@ export const fetchParksSuccess = (parks) => ({
     payload: parks,
 });
 
-export function addPark(title, instructions, imageUrl, country, type, user) {
-    try {
-        const id = parseInt(user.id);
-        return async function thunk(dispatch, getState) {
-            const response = await axios.post(
-                // API endpoint:
-                `${apiUrl}/endPoint`,
-                // Data to be sent along:
-                {
-                    title: title,
-                    instructions: instructions,
-                    imageUrl: imageUrl,
-                    country: country,
-                    type: type,
-                    userId: id,
-                },
-                { headers: { Authorization: `Bearer ${user.token}` } }
-            );
-            console.log("sucess, the data was sent:", response);
-            dispatch(setMessage("success", true, "Park have been created"));
-        };
-    } catch (error) {
-        console.log(error);
-    }
+
+export function addPark(title, description, imageUrl, country, type, user) {
+  try {
+    return async function thunk(dispatch, getState) {
+      const user = getState().user;
+      const response = await axios.post(
+        // API endpoint:
+        `${apiUrl}/park`,
+        // Data to be sent along:
+        {
+          title: title,
+          description: description,
+          image: imageUrl,
+          country: country,
+          type: type,
+        },
+        { headers: { Authorization: `Bearer ${user.token}` } }
+      );
+      console.log("sucess, the data was sent:", response);
+      dispatch(setMessage("success", true, "Park have been created"));
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+
