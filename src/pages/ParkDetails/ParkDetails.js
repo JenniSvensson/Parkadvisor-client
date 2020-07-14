@@ -21,7 +21,7 @@ export default function ParkDetails() {
   }
 
   useEffect(() => {
-    dispatch(fetchParks);
+    dispatch(fetchParks());
   }, [dispatch]);
 
   return (

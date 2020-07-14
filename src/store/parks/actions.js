@@ -29,10 +29,9 @@ export const reviewPostSucces = (newReview) => ({
 
 export const fetchParks = () => {
   return async (dispatch, getState) => {
-    const artCount = getState().art.length;
     const response = await axios.get(`${apiUrl}/park`);
-    console.log("In action: what is my respone?", response);
-    dispatch(fetchParksSuccess(response.data.parks.rows));
+    console.log("In action: what is my respone?", response.data);
+    dispatch(fetchParksSuccess(response.data));
   };
 };
 
