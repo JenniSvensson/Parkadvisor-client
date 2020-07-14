@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Row, Button, Container } from "react-bootstrap";
 
 // import { useDispatch } from "react-redux";
-// import { newReview } from "../../store/art/actions";
+// import { newReview } from "../../store/parks/actions";
 
 
 
