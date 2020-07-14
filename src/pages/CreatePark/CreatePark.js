@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken, selectUser } from "../../store/user/selectors";
+import { useHistory } from "react-router-dom";
+import { addPark } from "../../store/parks/actions";
 
 export default function CreatePark() {
   const [title, setTitle] = useState("");
@@ -9,11 +12,14 @@ export default function CreatePark() {
   const [country, setCountry] = useState("");
   const [type, setType] = useState("");
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  //   const token = useSelector(selectToken);
+  //   const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log("form input: ", title, description, imageUrl, country, type);
-    // dispatch(addPark(title, description, imageUrl, country))
+    dispatch(addPark(title, description, imageUrl, country, user));
 
     //reset form
     setTitle("");
@@ -22,6 +28,12 @@ export default function CreatePark() {
     setCountry("");
     setType("");
   }
+
+  //   useEffect(() => {
+  //     if (token === null) {
+  //       history.push("/");
+  //     }
+  //   }, [token, history]);
 
   return (
     <div>
