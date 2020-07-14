@@ -1,38 +1,37 @@
 import axios from "axios";
-import { selectUser } from "../user/selectors"
+import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { setMessage } from "../appState/actions";
 
 export const newReview = (title, rating) => {
-    return async (dispatch, getState) => {
-        const { id, token } = selectUser(getState())
-        //dispatch(appLoading())
-        const response = await axios.post(`${apiUrl}/reviews/new`,
-            {
-                title,
-                rating
-            },
-            {
-                headers: { Authorization: `Bearer ${token}` }
-            }
-        );
-        //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-        dispatch(reviewPostSucces(response.data.newArtWork))
-    }
-}
+  return async (dispatch, getState) => {
+    const { id, token } = selectUser(getState());
+    //dispatch(appLoading())
+    const response = await axios.post(
+      `${apiUrl}/reviews/new`,
+      {
+        title,
+        rating,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
+    dispatch(reviewPostSucces(response.data.newArtWork));
+  };
+};
 
-export const reviewPostSucces = newReview => ({
-    type: "POST_SUCCES",
-    payload: newReview
-})
+export const reviewPostSucces = (newReview) => ({
+  type: "POST_REVIEW_SUCCES",
+  payload: newReview,
+});
 
 export const fetchParks = () => {
   return async (dispatch, getState) => {
     const artCount = getState().art.length;
-    const response = await axios.get(
-      `${apiUrl}/parks?limit=10&offset=${artCount}`
-    );
-    console.log("In action: what is my respone?", response.data.parks.rows);
+    const response = await axios.get(`${apiUrl}/park`);
+    console.log("In action: what is my respone?", response);
     dispatch(fetchParksSuccess(response.data.parks.rows));
   };
 };
@@ -42,21 +41,20 @@ export const fetchParksSuccess = (parks) => ({
   payload: parks,
 });
 
-export function addPark(title, instructions, imageUrl, country, type, user) {
+export function addPark(title, description, imageUrl, country, type, user) {
   try {
-    const id = parseInt(user.id);
     return async function thunk(dispatch, getState) {
+      const user = getState().user;
       const response = await axios.post(
         // API endpoint:
-        `${apiUrl}/endPoint`,
+        `${apiUrl}/park`,
         // Data to be sent along:
         {
           title: title,
-          instructions: instructions,
-          imageUrl: imageUrl,
+          description: description,
+          image: imageUrl,
           country: country,
           type: type,
-          userId: id,
         },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
