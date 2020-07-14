@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Row, Button, Container } from "react-bootstrap";
 
-import { useDispatch } from "react-redux";
-import { newReview } from "../../store/art/actions";
+// import { useDispatch } from "react-redux";
+// import { newReview } from "../../store/art/actions";
 
 
 
 export default function ParkDetails() {
+    const [reviewText, setReviewText] = useState();
 
-    function handleSubmit() {
-        event.preventDefault();
-        setSubmitState(true)
-        dispatch(newReview())
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        // setSubmitState(true)
+        // dispatch(newReview())
     }
 
     return (
@@ -29,11 +31,11 @@ export default function ParkDetails() {
                         <Form.Group controlId="formBasicTitle">
                             <Form.Label>Leave a review</Form.Label>
                             <Form.Control
-                                onChange={(event) => setTitle(event.target.value)}
+                                onChange={(e) => setReviewText(e.target.value)}
                                 type="text"
-                                name="title"
-                                value={title}
-                                placeholder="Enter title"
+                                name="review-text"
+                                value={reviewText}
+                                placeholder="nice park"
                             />
                         </Form.Group>
                     </Form>
