@@ -44,7 +44,7 @@ export default function Homepage() {
                         <PreviewCard
                             title={park.title}
                             description={park.description}
-                            imageUrl={park.imageUrl}
+                            imageUrl={park.image}
                             country={park.country}
                             type={park.type} />
                     );
