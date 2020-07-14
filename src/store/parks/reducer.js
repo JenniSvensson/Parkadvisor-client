@@ -5,6 +5,10 @@ export default (state = initialState, action) => {
         case "FETCH_PARKS_SUCCESS":
             return [...state, ...action.payload];
 
+        case "POST_REVIEW_SUCCES":
+            return [...state, { ...action.payload }];
+
+
         default:
             return state;
     }
