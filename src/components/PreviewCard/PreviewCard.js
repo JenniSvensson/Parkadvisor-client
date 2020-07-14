@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import { Link } from "react-router-dom"
 
 // const meanRating = () => 
@@ -18,8 +17,8 @@ export default function PreviewCard() {
                     <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content. <br />
-                        The stars can be displayed by multiplying star by the avarage rating
-                        {/* {<span></span> * meanRating} */}
+                        {/* The stars can be displayed by multiplying star by the avarage rating */}
+                        {/* {"★"} */}
 
                     </Card.Text>
 

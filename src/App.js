@@ -7,13 +7,15 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import Homepage from "./pages/Homepage/Homepage"
+import Homepage from "./pages/Homepage/Homepage";
+import ParkDetails from "./pages/ParkDetails/ParkDetails"
+import CreatePark from "./pages/CreatePark/CreatePark";
+
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { Jumbotron } from "react-bootstrap";
-import CreatePark from "./pages/CreatePark/CreatePark";
 
 const Home = () => (
   <Jumbotron>
@@ -40,10 +42,10 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-    
+
         <Route exact path="/" component={Homepage} />
-        <Route path="/parks" component={Homepage} />
-        <Route path="/parks/:id" component={Homepage} />
+        <Route path="/park" component={ParkDetails} />
+        <Route path="/park/:id" component={Homepage} />
         <Route path="/createPark" component={CreatePark} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
