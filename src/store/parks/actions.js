@@ -39,7 +39,7 @@ export const fetchParksSuccess = parks => ({
     payload: parks,
 });
 
-
+//ADD PARK
 export function addPark(title, description, imageUrl, country, type, user) {
     try {
         return async function thunk(dispatch, getState) {
