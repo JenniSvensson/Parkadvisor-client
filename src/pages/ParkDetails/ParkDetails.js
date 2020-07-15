@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Form, Row, Button, Container, Image } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Button,
+  Container,
+  Image,
+  PopoverTitle,
+} from "react-bootstrap";
 import { selectParkById } from "../../store/parks/selectors";
 import { fetchParks } from "../../store/parks/actions";
-
-// import { newReview } from "../../store/parks/actions";
+import { newReview } from "../../store/parks/actions";
 
 export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
+  const [title, setTitle] = useState();
+  const [stars, setStars] = useState(4);
   const params = useParams();
-  const parkId = parseInt(params.id);
+  const parkId = 1;
+  // parseInt(params.id);
   const currentPark = useSelector(selectParkById(parkId));
   const dispatch = useDispatch();
   //const reviews= useSelector()
   function handleSubmit(e) {
     e.preventDefault();
-    // setSubmitState(true)
-    // dispatch(newReview())
+
+    dispatch(newReview(reviewText, title, stars, parkId));
+    //reset form
+    setReviewText("");
+    setTitle("");
   }
 
   useEffect(() => {
@@ -41,18 +53,31 @@ export default function ParkDetails() {
         </Row>
         <Row>Reviews</Row>
         <Row>
-          <h1>Leave a review</h1>
+          <h1>Reviews</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                name="title"
+                value={title}
+                placeholder="Enter title"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicComment">
               <Form.Label>Leave a review</Form.Label>
               <Form.Control
                 onChange={(e) => setReviewText(e.target.value)}
                 type="text"
                 name="review-text"
                 value={reviewText}
-                placeholder="nice park"
+                placeholder="Enter comment"
               />
             </Form.Group>
+            <Button type="submit" value="submit">
+              Submit
+            </Button>
           </Form>
         </Row>
       </Container>
