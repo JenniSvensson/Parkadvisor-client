@@ -17,16 +17,17 @@ export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
   const [title, setTitle] = useState();
   const [stars, setStars] = useState(4);
-  const params = useParams();
-  const parkId = 1;
-  // parseInt(params.id);
-  const currentPark = useSelector(selectParkById(parkId));
+  const { id } = useParams();
   const dispatch = useDispatch();
   //const reviews= useSelector()
+  // const parkId = parseInt(id)
+  const currentPark = useSelector(selectParkById(id));
+
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(newReview(reviewText, title, stars, parkId));
+    dispatch(newReview(reviewText, title, stars, id));
     //reset form
     setReviewText("");
     setTitle("");
@@ -34,6 +35,7 @@ export default function ParkDetails() {
 
   useEffect(() => {
     dispatch(fetchParks());
+    console.log(id)
   }, [dispatch]);
 
   return (
@@ -48,8 +50,8 @@ export default function ParkDetails() {
               <p>{currentPark.description}</p>
             </div>
           ) : (
-            <p>Loading</p>
-          )}
+              <p>Loading</p>
+            )}
         </Row>
         <Row>Reviews</Row>
         <Row>

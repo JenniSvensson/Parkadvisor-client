@@ -3,7 +3,7 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { setMessage } from "../appState/actions";
 
-export const newReview = (name, description, stars, parkId) => {
+export const newReview = (description, name, stars, parkId) => {
     return async (dispatch, getState) => {
         const { token } = selectUser(getState())
         //dispatch(appLoading())
