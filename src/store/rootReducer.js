@@ -5,6 +5,6 @@ import user from "./user/reducer";
 
 export default combineReducers({
   appState,
-  parks,
   user,
+  parks,
 });

@@ -1,4 +1,5 @@
-export const selectParks = (state) => state.art;
+
+export const selectParks = state => state.parks;
 
 export const selectParkById = (id) => (state) => {
   if (state.parks.length) {
@@ -8,3 +9,4 @@ export const selectParkById = (id) => (state) => {
     return result;
   }
 };
+

@@ -8,13 +8,18 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+//Redux
+import { fetchParks } from "../../store/parks/actions";
+import { selectParks } from "../../store/parks/selectors";
+
 export default function Homepage() {
     const dispatch = useDispatch();
-    // const parks = useSelector(selectParks);
+    const parks = useSelector(selectParks);
 
-    // useEffect(() => {
-    //     dispatch(fetchParks());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(fetchParks());
+        console.log("parks in homepage:", parks)
+    }, [dispatch]);
 
 
     return (
@@ -34,22 +39,16 @@ export default function Homepage() {
                 </Container>
             </Jumbotron>
             <CardColumns>
-                {/* {parks && parks.map(park => {
+                {parks && parks.map(park => {
                     return (
-
-                        <PreviewCard />
-
+                        <PreviewCard
+                            title={park.title}
+                            description={park.description}
+                            imageUrl={park.image}
+                            country={park.country}
+                            type={park.type} />
                     );
-                })} */}
-
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
-                <PreviewCard />
+                })}
 
             </CardColumns>
         </div>
