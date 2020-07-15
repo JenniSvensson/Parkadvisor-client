@@ -7,11 +7,12 @@ import { showMessageWithTimeout } from "../appState/actions";
 export const fetchParks = () => {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/park`);
-    console.log("In action: what is my respone?", response.data);
-    dispatch(fetchParksSuccess(response.data));
+    console.log("In action: what is my respone?", response.data.rows);
+    dispatch(fetchParksSuccess(response.data.rows));
   };
 };
 export const fetchParksSuccess = (parks) => ({
+
   type: "FETCH_PARKS_SUCCESS",
   payload: parks,
 });

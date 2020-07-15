@@ -41,6 +41,16 @@ export default function ParkDetails() {
     setTitle("");
   }
 
+  const meanRating = () => {
+    let rating = 0
+    currentPark.reviews.forEach(review => {
+      rating += review.stars
+    })
+    rating = Math.floor(rating / currentPark.reviews.length)
+    const star = "★"
+    return star.repeat(rating)
+  }
+
   useEffect(() => {
     dispatch(fetchParks());
     dispatch(fetchReviews(id));
@@ -74,15 +84,17 @@ export default function ParkDetails() {
           {currentPark ? (
             <div>
               <h1>{currentPark.title}</h1>
-              //stars rating here
-              <Image src={`${currentPark.image}`} />
+              {meanRating()}
+              <Image
+                src={`${currentPark.image}`}
+                className="image"
+                fluid />
               <p>{currentPark.description}</p>
             </div>
           ) : (
-            <p>Loading</p>
-          )}
+              <p>Loading</p>
+            )}
         </Row>
-        <Row>Reviews</Row>
         <Row>
           <Form onSubmit={handleSubmit}>
             <CloudinaryContext cloudName="parkadvisor">
