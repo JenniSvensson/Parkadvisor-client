@@ -11,7 +11,8 @@ import {
 } from "react-bootstrap";
 import { selectParkById } from "../../store/parks/selectors";
 import { fetchParks } from "../../store/parks/actions";
-import { newReview } from "../../store/parks/actions";
+import { newReview, fetchReviews } from "../../store/reviews/actions";
+import { selectReviews } from "../../store/reviews/selectors";
 
 export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
@@ -22,7 +23,9 @@ export default function ParkDetails() {
   //const reviews= useSelector()
   // const parkId = parseInt(id)
   const currentPark = useSelector(selectParkById(id));
+  console.log("this is the park", currentPark);
 
+  // console.log(reviews);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +38,7 @@ export default function ParkDetails() {
 
   useEffect(() => {
     dispatch(fetchParks());
-    console.log(id)
+    dispatch(fetchReviews(id));
   }, [dispatch]);
 
   return (
@@ -50,8 +53,8 @@ export default function ParkDetails() {
               <p>{currentPark.description}</p>
             </div>
           ) : (
-              <p>Loading</p>
-            )}
+            <p>Loading</p>
+          )}
         </Row>
         <Row>Reviews</Row>
         <Row>
