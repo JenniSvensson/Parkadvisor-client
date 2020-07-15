@@ -9,8 +9,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 //Redux
+import { selectParks } from "../../store/parks/selectors"
 import { fetchParks } from "../../store/parks/actions";
-import { selectParks } from "../../store/parks/selectors";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -21,38 +21,39 @@ export default function Homepage() {
     console.log("parks in homepage:", parks);
   }, [dispatch]);
 
-  return (
-    <div>
-      <Jumbotron fluid>
-        <Container>
-          <Row>
-            <Col>
-              <h1>Most popular parks</h1>
-            </Col>
-            <Col>
-              <Form>
-                <Form.Control type="text" placeholder="Search" />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </Jumbotron>
-      <CardColumns>
-        {parks.rows &&
-          parks.rows.map((park) => {
-            return (
-              <PreviewCard
-                title={park.title}
-                description={park.description}
-                imageUrl={park.image}
-                country={park.country}
-                type={park.type}
-                id={park.id}
-              />
-            );
-          })}
-      </CardColumns>
-    </div>
-  );
+    return (
+        <div>
+            <Jumbotron fluid>
+                <Container>
+                    <Row><Col>
+                        <h1>Explore the parks</h1>
+                    </Col>
+                        <Col>
+                            <Form>
+                                <Form.Control type="text" placeholder="Search" />
+                                <Form.Text className="text-muted">
+                                </Form.Text>
+                            </Form>
+                        </Col> </Row>
+                </Container>
+            </Jumbotron>
+            <CardColumns>
+                {parks.rows && parks.rows.map(park => {
+
+                    return (
+                        <PreviewCard
+                            title={park.title}
+                            description={park.description}
+                            imageUrl={park.image}
+                            country={park.country}
+                            type={park.type}
+                            id={park.id}
+                            reviews={park.reviews} />
+                    );
+                })}
+
+            </CardColumns>
+        </div>
+    )
+
 }
