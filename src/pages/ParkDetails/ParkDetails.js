@@ -22,10 +22,7 @@ export default function ParkDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const reviews = useSelector(selectReviews);
-  // const parkId = parseInt(id)
   const currentPark = useSelector(selectParkById(id));
-
-  // console.log(reviews);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -88,7 +85,7 @@ export default function ParkDetails() {
           <h1>Reviews({reviews.length})</h1>
           {reviews.map((review) => {
             return (
-              <div>
+              <div key={review.id}>
                 <h2>{review.name}</h2>
                 <h5>{review.updatedAt}</h5>
                 <p>{review.description}</p>
