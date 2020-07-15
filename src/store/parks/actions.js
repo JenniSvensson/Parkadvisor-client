@@ -3,14 +3,16 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { setMessage } from "../appState/actions";
 
-export const newReview = (title, rating) => {
+export const newReview = (name, description, stars, parkId) => {
     return async (dispatch, getState) => {
-        const { id, token } = selectUser(getState())
+        const { token } = selectUser(getState())
         //dispatch(appLoading())
-        const response = await axios.post(`${apiUrl}/reviews/new`,
+        const response = await axios.post(`${apiUrl}/review`,
             {
-                title,
-                rating
+                name,
+                description,
+                stars,
+                parkId
             },
             {
                 headers: { Authorization: `Bearer ${token}` }
