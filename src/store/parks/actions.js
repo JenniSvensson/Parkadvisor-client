@@ -5,7 +5,7 @@ import { setMessage } from "../appState/actions";
 
 export const newReview = (description, name, stars, parkId) => {
   return async (dispatch, getState) => {
-    const { id, token } = selectUser(getState());
+    const { token } = selectUser(getState());
     //dispatch(appLoading())
     const response = await axios.post(
       `${apiUrl}/review`,
@@ -27,6 +27,7 @@ export const reviewPostSucces = (newReview) => ({
   type: "POST_REVIEW_SUCCES",
   payload: newReview,
 });
+
 //FETCH PARKS
 export const fetchParks = () => {
   return async (dispatch, getState) => {
