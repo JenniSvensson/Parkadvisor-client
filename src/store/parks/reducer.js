@@ -6,8 +6,10 @@ export default (state = initialState, action) => {
             return action.payload
 
         case "POST_REVIEW_SUCCES":
-            return [...state, { ...action.payload }];
+            return [...state, { ...action.payload }]
 
+        case "FETCH_REVIEWS_SUCCESS":
+            return action.payload
 
         default:
             return state;
