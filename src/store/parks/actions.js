@@ -16,7 +16,6 @@ export const fetchParksSuccess = (parks) => ({
 
   type: "FETCH_PARKS_SUCCESS",
   payload: parks,
-
 });
 
 //ADD PARK

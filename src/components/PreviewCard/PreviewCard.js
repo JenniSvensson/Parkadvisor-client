@@ -9,7 +9,7 @@ export default function PreviewCard(props) {
     const meanRating = () => {
         let rating = 0
         props.reviews.forEach(review => {
-            rating += review.stars //maybe parseInt??
+            rating += review.stars
         })
         rating = Math.floor(rating / props.reviews.length)
         const star = "★"
