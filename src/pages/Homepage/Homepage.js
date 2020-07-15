@@ -46,7 +46,8 @@ export default function Homepage() {
                             description={park.description}
                             imageUrl={park.image}
                             country={park.country}
-                            type={park.type} />
+                            type={park.type}
+                            id={park.id} />
                     );
                 })}
 
