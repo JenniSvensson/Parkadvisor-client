@@ -3,7 +3,6 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { showMessageWithTimeout } from "../appState/actions";
 
-
 //FETCH PARKS
 export const fetchParks = () => {
   return async (dispatch, getState) => {
@@ -42,7 +41,6 @@ export function addPark(title, description, imageUrl, country, type, user) {
       dispatch(
         showMessageWithTimeout("success", true, "Park have been created")
       );
-
     };
   } catch (error) {
     console.log(error);
