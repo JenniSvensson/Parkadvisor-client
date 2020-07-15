@@ -3,41 +3,57 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { showMessageWithTimeout } from "../appState/actions";
 
-export const newReview = (name, description, stars, parkId) => {
-  return async (dispatch, getState) => {
-    const { token } = selectUser(getState());
-    //dispatch(appLoading())
-    const response = await axios.post(
-      `${apiUrl}/review`,
-      {
-        name,
-        description,
-        stars,
-        parkId,
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    dispatch(reviewPostSucces(response.data.newPark));
-  };
+
+export const newReview = (description, name, stars, parkId) => {
+    return async (dispatch, getState) => {
+        const { token } = selectUser(getState())
+        //dispatch(appLoading())
+        const response = await axios.post(`${apiUrl}/review`,
+            {
+                name,
+                description,
+                stars,
+                parkId
+            },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+        );
+        //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
+        dispatch(reviewPostSucces(response.data.newPark))
+    }
+}
+export const reviewPostSucces = newReview => ({
+    type: "POST_REVIEW_SUCCES",
+    payload: newReview
+})
+//FETCH REVIEWS FOR A PARK
+export const fetchReviews = (parkId) => {
+    return async (dispatch, getState) => {
+        const response = await axios.get(
+            `${apiUrl}/park/${parkId}/reviews`
+        );
+        console.log("Reviews:", response.data);
+        dispatch(fetchReviewsSuccess(response.data));
+    };
 };
-export const reviewPostSucces = (newReview) => ({
-  type: "POST_REVIEW_SUCCES",
-  payload: newReview,
+export const fetchReviewsSuccess = reviews => ({
+    type: "FETCH_REVIEWS_SUCCESS",
+    payload: reviews,
 });
+
 //FETCH PARKS
 export const fetchParks = () => {
-  return async (dispatch, getState) => {
-    const response = await axios.get(`${apiUrl}/park`);
-    console.log("In action: what is my respone?", response.data);
-    dispatch(fetchParksSuccess(response.data));
-  };
+    return async (dispatch, getState) => {
+        const response = await axios.get(`${apiUrl}/park`);
+        console.log("In action: what is my respone?", response.data);
+        dispatch(fetchParksSuccess(response.data));
+    };
 };
 export const fetchParksSuccess = (parks) => ({
-  type: "FETCH_PARKS_SUCCESS",
-  payload: parks,
+    type: "FETCH_PARKS_SUCCESS",
+    payload: parks,
+
 });
 
 //ADD PARK

@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Form, Row, Button, Container, Image } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Button,
+  Container,
+  Image,
+  PopoverTitle,
+} from "react-bootstrap";
 import { selectParkById } from "../../store/parks/selectors";
 import { fetchParks } from "../../store/parks/actions";
-
-// import { newReview } from "../../store/parks/actions";
+import { newReview } from "../../store/parks/actions";
 
 export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
-  const params = useParams();
-  const parkId = parseInt(params.id);
-  const currentPark = useSelector(selectParkById(parkId));
+  const [title, setTitle] = useState();
+  const [stars, setStars] = useState(4);
+  const { id } = useParams();
   const dispatch = useDispatch();
   //const reviews= useSelector()
+  // const parkId = parseInt(id)
+  const currentPark = useSelector(selectParkById(id));
+
+
   function handleSubmit(e) {
     e.preventDefault();
-    // setSubmitState(true)
-    // dispatch(newReview())
+
+    dispatch(newReview(reviewText, title, stars, id));
+    //reset form
+    setReviewText("");
+    setTitle("");
   }
 
   useEffect(() => {
     dispatch(fetchParks());
+    console.log(id)
   }, [dispatch]);
 
   return (
@@ -36,23 +50,36 @@ export default function ParkDetails() {
               <p>{currentPark.description}</p>
             </div>
           ) : (
-            <p>Loading</p>
-          )}
+              <p>Loading</p>
+            )}
         </Row>
         <Row>Reviews</Row>
         <Row>
-          <h1>Leave a review</h1>
+          <h1>Reviews</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                name="title"
+                value={title}
+                placeholder="Enter title"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicComment">
               <Form.Label>Leave a review</Form.Label>
               <Form.Control
                 onChange={(e) => setReviewText(e.target.value)}
                 type="text"
                 name="review-text"
                 value={reviewText}
-                placeholder="nice park"
+                placeholder="Enter comment"
               />
             </Form.Group>
+            <Button type="submit" value="submit">
+              Submit
+            </Button>
           </Form>
         </Row>
       </Container>
