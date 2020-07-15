@@ -3,6 +3,7 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { showMessageWithTimeout } from "../appState/actions";
 
+<<<<<<< HEAD
 export const newReview = (description, name, stars, parkId) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
@@ -39,6 +40,8 @@ export const fetchReviewsSuccess = (reviews) => ({
   type: "FETCH_REVIEWS_SUCCESS",
   payload: reviews,
 });
+=======
+>>>>>>> 1072ebe4a548bdee8ddeee7bc7f82cd7a4fc5ead
 
 //FETCH PARKS
 export const fetchParks = () => {
@@ -49,8 +52,15 @@ export const fetchParks = () => {
   };
 };
 export const fetchParksSuccess = (parks) => ({
+<<<<<<< HEAD
   type: "FETCH_PARKS_SUCCESS",
   payload: parks,
+=======
+
+    type: "FETCH_PARKS_SUCCESS",
+    payload: parks,
+
+>>>>>>> 1072ebe4a548bdee8ddeee7bc7f82cd7a4fc5ead
 });
 
 //ADD PARK
@@ -73,9 +83,11 @@ export function addPark(title, description, imageUrl, country, type, user) {
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       console.log("sucess, the data was sent:", response);
+
       dispatch(
         showMessageWithTimeout("success", true, "Park have been created")
       );
+
     };
   } catch (error) {
     console.log(error);
