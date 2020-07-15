@@ -9,8 +9,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 //Redux
+import { selectParks } from "../../store/parks/selectors"
 import { fetchParks } from "../../store/parks/actions";
-import { selectParks } from "../../store/parks/selectors";
 
 export default function Homepage() {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function Homepage() {
             <Jumbotron fluid>
                 <Container>
                     <Row><Col>
-                        <h1>Most popular parks</h1>
+                        <h1>Explore the parks</h1>
                     </Col>
                         <Col>
                             <Form>
@@ -40,6 +40,7 @@ export default function Homepage() {
             </Jumbotron>
             <CardColumns>
                 {parks && parks.map(park => {
+
                     return (
                         <PreviewCard
                             title={park.title}
@@ -47,7 +48,8 @@ export default function Homepage() {
                             imageUrl={park.image}
                             country={park.country}
                             type={park.type}
-                            id={park.id} />
+                            id={park.id}
+                            reviews={park.reviews} />
                     );
                 })}
 

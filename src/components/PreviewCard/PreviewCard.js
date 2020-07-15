@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card'
 import { Link } from "react-router-dom"
 
-// const meanRating = () => 
-
 
 export default function PreviewCard(props) {
+
+    const meanRating = () => {
+        let rating = 0
+        props.reviews.forEach(review => {
+            rating += review.stars //maybe parseInt??
+        })
+        rating = Math.floor(rating / props.reviews.length)
+        const star = "★"
+        return star.repeat(rating)
+    }
+
     return (
         <Link
             to={`/park/${props.id}`}
@@ -15,9 +25,7 @@ export default function PreviewCard(props) {
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text> {props.decription} <br />
-                        {/* The stars can be displayed by multiplying star by the avarage rating */}
-                        {/* {"★"} */}
-
+                        {meanRating()}
                     </Card.Text>
 
                 </Card.Body>
