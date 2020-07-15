@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   Form,
+  Col,
   Row,
   Button,
   Container,
@@ -20,10 +21,9 @@ export default function ParkDetails() {
   const [stars, setStars] = useState(4);
   const { id } = useParams();
   const dispatch = useDispatch();
-  //const reviews= useSelector()
+  const reviews = useSelector(selectReviews);
   // const parkId = parseInt(id)
   const currentPark = useSelector(selectParkById(id));
-  console.log("this is the park", currentPark);
 
   // console.log(reviews);
 
@@ -49,7 +49,7 @@ export default function ParkDetails() {
             <div>
               <h1>{currentPark.title}</h1>
               //stars rating here
-              <Image src={`${currentPark.imageUrl}`} />
+              <Image src={`${currentPark.image}`} />
               <p>{currentPark.description}</p>
             </div>
           ) : (
@@ -58,7 +58,6 @@ export default function ParkDetails() {
         </Row>
         <Row>Reviews</Row>
         <Row>
-          <h1>Reviews</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicTitle">
               <Form.Label>Title</Form.Label>
@@ -85,6 +84,18 @@ export default function ParkDetails() {
             </Button>
           </Form>
         </Row>
+        <Col>
+          <h1>Reviews({reviews.length})</h1>
+          {reviews.map((review) => {
+            return (
+              <div>
+                <h2>{review.name}</h2>
+                <h5>{review.updatedAt}</h5>
+                <p>{review.description}</p>
+              </div>
+            );
+          })}
+        </Col>
       </Container>
     </div>
   );
