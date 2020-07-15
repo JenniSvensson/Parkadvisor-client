@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 export default function PreviewCard(props) {
     return (
         <Link
-            to={`/parks/${props.id}`}
+            to={`/park/${props.id}`}
         >
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={props.imageUrl} />
