@@ -3,46 +3,6 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { showMessageWithTimeout } from "../appState/actions";
 
-<<<<<<< HEAD
-export const newReview = (description, name, stars, parkId) => {
-  return async (dispatch, getState) => {
-    const { token } = selectUser(getState());
-    //dispatch(appLoading())
-    const response = await axios.post(
-      `${apiUrl}/review`,
-      {
-        name,
-        description,
-        stars,
-        parkId,
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    dispatch(reviewPostSucces(response.data.newPark));
-  };
-};
-export const reviewPostSucces = (newReview) => ({
-  type: "POST_REVIEW_SUCCES",
-  payload: newReview,
-});
-//FETCH REVIEWS FOR A PARK
-export const fetchReviews = (parkId) => {
-  return async (dispatch, getState) => {
-    const response = await axios.get(`${apiUrl}/park/${parkId}/reviews`);
-    console.log("Reviews:", response.data);
-    dispatch(fetchReviewsSuccess(response.data));
-  };
-};
-export const fetchReviewsSuccess = (reviews) => ({
-  type: "FETCH_REVIEWS_SUCCESS",
-  payload: reviews,
-});
-=======
->>>>>>> 1072ebe4a548bdee8ddeee7bc7f82cd7a4fc5ead
-
 //FETCH PARKS
 export const fetchParks = () => {
   return async (dispatch, getState) => {
@@ -52,15 +12,8 @@ export const fetchParks = () => {
   };
 };
 export const fetchParksSuccess = (parks) => ({
-<<<<<<< HEAD
   type: "FETCH_PARKS_SUCCESS",
   payload: parks,
-=======
-
-    type: "FETCH_PARKS_SUCCESS",
-    payload: parks,
-
->>>>>>> 1072ebe4a548bdee8ddeee7bc7f82cd7a4fc5ead
 });
 
 //ADD PARK
@@ -87,7 +40,6 @@ export function addPark(title, description, imageUrl, country, type, user) {
       dispatch(
         showMessageWithTimeout("success", true, "Park have been created")
       );
-
     };
   } catch (error) {
     console.log(error);
