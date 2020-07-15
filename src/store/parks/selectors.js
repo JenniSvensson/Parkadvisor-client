@@ -1,12 +1,11 @@
 
 export const selectParks = state => state.parks;
 
-export const selectParkById = (id) => (reduxState) => {
-  if (reduxState.park) {
-    const result = reduxState.park.find((recipe) => {
-      return recipe.id === id;
+export const selectParkById = (id) => (state) => {
+  if (state.parks.length) {
+    const result = state.parks.find((park) => {
+      return park.id === id;
     });
-
     return result;
   }
 };

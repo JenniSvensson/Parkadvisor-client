@@ -10,8 +10,8 @@ import { fetchParks } from "../../store/parks/actions";
 export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
   const params = useParams();
-  const RecipeId = parseInt(params.id);
-  const currentPark = useSelector(selectParkById(RecipeId));
+  const parkId = parseInt(params.id);
+  const currentPark = useSelector(selectParkById(parkId));
   const dispatch = useDispatch();
   //const reviews= useSelector()
   function handleSubmit(e) {
@@ -28,18 +28,13 @@ export default function ParkDetails() {
     <div className="parkDetails">
       <Container>
         <Row>
-          Details
           {currentPark ? (
-            currentPark.map((park) => {
-              return (
-                <div>
-                  <h1>{park.title}</h1>
-                  //stars rating here
-                  <Image src={`${park.imageUrl}`} />
-                  <p>{park.description}</p>
-                </div>
-              );
-            })
+            <div>
+              <h1>{currentPark.title}</h1>
+              //stars rating here
+              <Image src={`${currentPark.imageUrl}`} />
+              <p>{currentPark.description}</p>
+            </div>
           ) : (
             <p>Loading</p>
           )}
