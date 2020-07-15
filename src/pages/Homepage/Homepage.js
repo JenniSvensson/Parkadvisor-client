@@ -1,26 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PreviewCard from '../../components/PreviewCard/PreviewCard'
+import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import CardColumns from "react-bootstrap/CardColumns";
-import Form from 'react-bootstrap/Form'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Form from "react-bootstrap/Form";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 //Redux
 import { selectParks } from "../../store/parks/selectors"
 import { fetchParks } from "../../store/parks/actions";
 
 export default function Homepage() {
-    const dispatch = useDispatch();
-    const parks = useSelector(selectParks);
+  const dispatch = useDispatch();
+  const parks = useSelector(selectParks);
 
-    useEffect(() => {
-        dispatch(fetchParks());
-        console.log("parks in homepage:", parks)
-    }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(fetchParks());
+    console.log("parks in homepage:", parks);
+  }, [dispatch]);
 
     return (
         <div>
@@ -39,7 +38,7 @@ export default function Homepage() {
                 </Container>
             </Jumbotron>
             <CardColumns>
-                {parks && parks.map(park => {
+                {parks.rows && parks.rows.map(park => {
 
                     return (
                         <PreviewCard
@@ -56,4 +55,5 @@ export default function Homepage() {
             </CardColumns>
         </div>
     )
+
 }
