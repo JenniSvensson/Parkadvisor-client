@@ -20,7 +20,7 @@ import {
 import { CloudinaryContext } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../config/CloudinaryService";
 import { showMessageWithTimeout } from "../../store/appState/actions";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken, selectUser } from "../../store/user/selectors";
 
 export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
@@ -28,12 +28,14 @@ export default function ParkDetails() {
   const [stars, setStars] = useState();
   const [reported, setReported] = useState(false)
   const [imageUrl, setImageUrl] = useState("");
+  const [submitted, setSubmitted] = useState(false)
   const { id } = useParams();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const reviews = useSelector(selectReviews);
+  //const reviews = useSelector(selectReviews);
   const currentPark = useSelector(selectParkById(id));
   const currentReviews = useSelector(selectReviewsById(id));
+  const user = useSelector(selectUser)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,6 +44,7 @@ export default function ParkDetails() {
     setReviewText("");
     setTitle("");
     setImageUrl("");
+    setSubmitted(true)
   }
 
   const meanRating = () => {
@@ -58,7 +61,18 @@ export default function ParkDetails() {
     dispatch(fetchParks());
     dispatch(fetchReviews(id));
     fetchPhotos("image", setImageUrl);
-  }, [dispatch]);
+    console.log("useEffect fired")
+    console.log("currentReviews:", currentReviews)
+    console.log("reviews:", currentReviews)
+    currentReviews.forEach(review => {
+      console.log("review")
+      if (review.userId === user.id) {
+        console.log("you already submitted a review")
+        setSubmitted(true)
+      }
+    }
+    )
+  }, [dispatch, submitted]);
 
   //upload picture
   const beginUpload = (tag) => {
@@ -94,8 +108,7 @@ export default function ParkDetails() {
               <Button
                 onClick={report}
                 disabled={reported}>Report</Button>
-              <h1>{currentPark.title}</h1>
-              {meanRating()}
+              <h1>{currentPark.title}{"  "}{meanRating()}</h1>
               <Image src={`${currentPark.image}`} className="image" fluid />
               <p>{currentPark.description}</p>
             </div>
@@ -104,7 +117,7 @@ export default function ParkDetails() {
             )}
         </Row>
         <Row>
-          {token && (
+          {token && !submitted ? (
             <Form onSubmit={handleSubmit}>
               <CloudinaryContext cloudName="parkadvisor">
                 <Form.Group controlId="formBasicTitle">
@@ -162,7 +175,7 @@ export default function ParkDetails() {
                 </Button>
               </CloudinaryContext>
             </Form>
-          )}
+          ) : !token ? "Log in to post review" : "You submitted a review for this park"}
         </Row>
         <Col>
           <h1>Reviews({currentReviews.length})</h1>
@@ -182,7 +195,7 @@ export default function ParkDetails() {
                   />
                 )}
 
-                <h5>{review.updatedAt}</h5>
+                <h5>By {review.userName} on {review.updatedAt}</h5>
                 {"★".repeat(review.stars)}
                 <p>{review.description}</p>
               </div>
