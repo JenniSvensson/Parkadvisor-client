@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import CardColumns from "react-bootstrap/CardColumns";
@@ -13,13 +13,34 @@ import { selectParks } from "../../store/parks/selectors";
 import { fetchParks } from "../../store/parks/actions";
 
 export default function Homepage() {
+  const [search, setSearch] = useState("");
+  const [country, setCountry] = useState("");
   const dispatch = useDispatch();
   const parks = useSelector(selectParks);
 
   useEffect(() => {
     dispatch(fetchParks());
-    console.log("parks in homepage:", parks);
   }, [dispatch]);
+
+  //search by country, park title
+  const parksCountry = parks ? parks.map((park) => park.country) : null;
+  let parksToDisplay;
+
+  if (country) {
+    parksToDisplay = parks.filter((park) => park.country.includes(country));
+  } else if (search) {
+    parksToDisplay = parks.filter((park) =>
+      park.title.toLowerCase().includes(search)
+    );
+  } else if (search && country) {
+    parksToDisplay = parks.filter(
+      (park) =>
+        park.country.includes(country) &&
+        park.title.toLowerCase().includes(search)
+    );
+  } else {
+    parksToDisplay = parks;
+  }
 
   return (
     <div>
@@ -31,29 +52,54 @@ export default function Homepage() {
             </Col>
             <Col>
               <Form>
-                <Form.Control type="text" placeholder="Search" />
-                <Form.Text className="text-muted"></Form.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Search by name"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <Form.Control
+                  as="select"
+                  placeholder="Search by name"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="">Select country</option>
+
+                  {parksCountry ? (
+                    parksCountry.map((country) => (
+                      <option key={country}>{country}</option>
+                    ))
+                  ) : (
+                    <option>Loading</option>
+                  )}
+                </Form.Control>
               </Form>
             </Col>{" "}
           </Row>
         </Container>
       </Jumbotron>
-      <CardColumns>
-        {parks &&
-          parks.map((park) => {
-            return (
-              <PreviewCard
-                title={park.title}
-                description={park.description}
-                imageUrl={park.image}
-                country={park.country}
-                type={park.type}
-                id={park.id}
-                reviews={park.reviews}
-              />
-            );
-          })}
-      </CardColumns>
+      <Container>
+        <Row>
+          <CardColumns>
+            {parksToDisplay &&
+              parksToDisplay.map((park) => {
+                return (
+                  <PreviewCard
+                    key={park.title}
+                    title={park.title}
+                    description={park.description}
+                    imageUrl={park.image}
+                    country={park.country}
+                    type={park.type}
+                    id={park.id}
+                    reviews={park.reviews}
+                  />
+                );
+              })}
+          </CardColumns>{" "}
+        </Row>
+      </Container>
     </div>
   );
 }
