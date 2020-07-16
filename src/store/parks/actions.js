@@ -52,7 +52,7 @@ export function reportPark(parkId) {
   try {
     return async function thunk(dispatch, getState) {
       const user = getState().user;
-      const response = await axios.post(
+      const response = await axios.patch(
         // API endpoint:
         `${apiUrl}/park/${parkId}/report`,
         { headers: { Authorization: `Bearer ${user.token}` } }
