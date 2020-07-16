@@ -3,7 +3,7 @@ import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
 import { setMessage } from "../appState/actions";
 
-export const newReview = (description, name, stars, parkId) => {
+export const newReview = (description, name, stars, parkId, imageUrl) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     //dispatch(appLoading())
@@ -14,6 +14,7 @@ export const newReview = (description, name, stars, parkId) => {
         description,
         stars,
         parkId,
+        imageUrl,
       },
       {
         headers: { Authorization: `Bearer ${token}` },

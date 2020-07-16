@@ -32,10 +32,11 @@ export default function ParkDetails() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(newReview(reviewText, title, stars, id));
+    dispatch(newReview(reviewText, title, stars, id, imageUrl));
     //reset form
     setReviewText("");
     setTitle("");
+    setImageUrl("");
   }
 
   const meanRating = () => {
@@ -80,6 +81,7 @@ export default function ParkDetails() {
         <Row>
           {currentPark ? (
             <div>
+              <Button>Report</Button>
               <h1>{currentPark.title}</h1>
               {meanRating()}
               <Image src={`${currentPark.image}`} className="image" fluid />
@@ -156,6 +158,15 @@ export default function ParkDetails() {
             return (
               <div key={review.id}>
                 <h2>{review.name}</h2>
+                <Image
+                  src={review.imageUrl}
+                  className="img-responsive"
+                  style={{
+                    maxHeight: "25vh",
+                    maxWidth: "35vw",
+                    padding: "10px 0",
+                  }}
+                />
                 <h5>{review.updatedAt}</h5>
                 {"★".repeat(review.stars)}
                 <p>{review.description}</p>
