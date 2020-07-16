@@ -41,3 +41,25 @@ export const fetchReviewsSuccess = (reviews) => ({
   type: "FETCH_REVIEWS_SUCCESS",
   payload: reviews,
 });
+
+export const updateReview = (description, name, stars, parkId, imageUrl) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    //dispatch(appLoading())
+    const response = await axios.patch(
+      `${apiUrl}/review`,
+      {
+        name,
+        description,
+        stars,
+        parkId,
+        imageUrl,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
+    dispatch(reviewPostSucces(response.data.newPark));
+  };
+};
