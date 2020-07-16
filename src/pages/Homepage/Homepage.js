@@ -71,8 +71,8 @@ export default function Homepage() {
                       <option key={country}>{country}</option>
                     ))
                   ) : (
-                    <option>Loading</option>
-                  )}
+                      <option>Loading</option>
+                    )}
                 </Form.Control>
               </Form>
             </Col>{" "}
@@ -84,18 +84,20 @@ export default function Homepage() {
           <CardColumns>
             {parksToDisplay &&
               parksToDisplay.map((park) => {
-                return (
-                  <PreviewCard
-                    key={park.title}
-                    title={park.title}
-                    description={park.description}
-                    imageUrl={park.image}
-                    country={park.country}
-                    type={park.type}
-                    id={park.id}
-                    reviews={park.reviews}
-                  />
-                );
+                if (!park.hidden) {
+                  return (
+                    <PreviewCard
+                      key={park.title}
+                      title={park.title}
+                      description={park.description}
+                      imageUrl={park.image}
+                      country={park.country}
+                      type={park.type}
+                      id={park.id}
+                      reviews={park.reviews}
+                    />
+                  );
+                }
               })}
           </CardColumns>{" "}
         </Row>

@@ -11,7 +11,7 @@ import {
   PopoverTitle,
 } from "react-bootstrap";
 import { selectParkById } from "../../store/parks/selectors";
-import { fetchParks } from "../../store/parks/actions";
+import { fetchParks, reportPark } from "../../store/parks/actions";
 import { newReview, fetchReviews } from "../../store/reviews/actions";
 import { selectReviews } from "../../store/reviews/selectors";
 import { CloudinaryContext } from "cloudinary-react";
@@ -23,6 +23,7 @@ export default function ParkDetails() {
   const [reviewText, setReviewText] = useState();
   const [title, setTitle] = useState();
   const [stars, setStars] = useState();
+  const [reported, setReported] = useState(false)
   const [imageUrl, setImageUrl] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -75,21 +76,28 @@ export default function ParkDetails() {
     });
   };
 
+  function report() {
+    dispatch(reportPark(id))
+    setReported(true)
+  }
+
   return (
     <div className="parkDetails">
       <Container>
         <Row>
           {currentPark ? (
             <div>
-              <Button>Report</Button>
+              <Button
+                onClick={report}
+                disabled={reported}>Report</Button>
               <h1>{currentPark.title}</h1>
               {meanRating()}
               <Image src={`${currentPark.image}`} className="image" fluid />
               <p>{currentPark.description}</p>
             </div>
           ) : (
-            <p>Loading</p>
-          )}
+              <p>Loading</p>
+            )}
         </Row>
         <Row>
           {token && (
