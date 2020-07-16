@@ -46,3 +46,24 @@ export function addPark(title, description, imageUrl, country, type, user) {
     console.log(error);
   }
 }
+
+//REPORT A PARK
+export function reportPark(parkId) {
+  try {
+    return async function thunk(dispatch, getState) {
+      const user = getState().user;
+      const response = await axios.post(
+        // API endpoint:
+        `${apiUrl}/park/${parkId}/report`,
+        { headers: { Authorization: `Bearer ${user.token}` } }
+      );
+      console.log("reported:", response);
+
+      dispatch(
+        showMessageWithTimeout("success", true, "Park has been reported")
+      );
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
