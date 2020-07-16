@@ -158,15 +158,18 @@ export default function ParkDetails() {
             return (
               <div key={review.id}>
                 <h2>{review.name}</h2>
-                <Image
-                  src={review.imageUrl}
-                  className="img-responsive"
-                  style={{
-                    maxHeight: "25vh",
-                    maxWidth: "35vw",
-                    padding: "10px 0",
-                  }}
-                />
+                {review.imageUrl && (
+                  <Image
+                    src={review.imageUrl}
+                    className="img-responsive"
+                    style={{
+                      maxHeight: "25vh",
+                      maxWidth: "35vw",
+                      padding: "10px 0",
+                    }}
+                  />
+                )}
+
                 <h5>{review.updatedAt}</h5>
                 {"★".repeat(review.stars)}
                 <p>{review.description}</p>
