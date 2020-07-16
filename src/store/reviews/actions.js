@@ -21,7 +21,8 @@ export const newReview = (description, name, stars, parkId, imageUrl) => {
       }
     );
     //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    dispatch(reviewPostSucces(response.data.newPark));
+    console.log("respone from posting review", response.data)
+    dispatch(reviewPostSucces(response.data));
   };
 };
 export const reviewPostSucces = (newReview) => ({
