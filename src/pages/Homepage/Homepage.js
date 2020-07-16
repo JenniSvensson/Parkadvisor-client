@@ -23,7 +23,7 @@ export default function Homepage() {
   }, [dispatch]);
 
   //search by country, park title
-  const parksCountry = parks ? parks.map((park) => park.country) : null;
+
   let parksToDisplay;
 
   if (country) {
@@ -41,6 +41,14 @@ export default function Homepage() {
   } else {
     parksToDisplay = parks;
   }
+
+  //create an array with countries to display
+  const listOfCountries = [];
+  if (parks) {
+    parks.forEach((park) => listOfCountries.push(park.country));
+  }
+
+  const countries = [...new Set(listOfCountries)];
 
   return (
     <div>
@@ -66,13 +74,9 @@ export default function Homepage() {
                 >
                   <option value="">Select country</option>
 
-                  {parksCountry ? (
-                    parksCountry.map((country) => (
-                      <option key={country}>{country}</option>
-                    ))
-                  ) : (
-                      <option>Loading</option>
-                    )}
+                  {countries.map((country) => (
+                    <option key={country}>{country}</option>
+                  ))}
                 </Form.Control>
               </Form>
             </Col>{" "}
@@ -83,6 +87,7 @@ export default function Homepage() {
         <Row>
           <CardColumns>
             {parksToDisplay &&
+              // eslint-disable-next-line
               parksToDisplay.map((park) => {
                 if (!park.hidden) {
                   return (
