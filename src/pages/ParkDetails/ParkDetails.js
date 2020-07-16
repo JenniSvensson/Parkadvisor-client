@@ -13,7 +13,10 @@ import {
 import { selectParkById } from "../../store/parks/selectors";
 import { fetchParks } from "../../store/parks/actions";
 import { newReview, fetchReviews } from "../../store/reviews/actions";
-import { selectReviews } from "../../store/reviews/selectors";
+import {
+  selectReviews,
+  selectReviewsById,
+} from "../../store/reviews/selectors";
 import { CloudinaryContext } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../config/CloudinaryService";
 import { showMessageWithTimeout } from "../../store/appState/actions";
@@ -29,6 +32,7 @@ export default function ParkDetails() {
   const token = useSelector(selectToken);
   const reviews = useSelector(selectReviews);
   const currentPark = useSelector(selectParkById(id));
+  const currentReviews = useSelector(selectReviewsById(id));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -153,8 +157,8 @@ export default function ParkDetails() {
           )}
         </Row>
         <Col>
-          <h1>Reviews({reviews.length})</h1>
-          {reviews.map((review) => {
+          <h1>Reviews({currentReviews.length})</h1>
+          {currentReviews.map((review) => {
             return (
               <div key={review.id}>
                 <h2>{review.name}</h2>
