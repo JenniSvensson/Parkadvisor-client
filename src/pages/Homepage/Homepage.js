@@ -92,7 +92,7 @@ export default function Homepage() {
                 if (!park.hidden) {
                   return (
                     <PreviewCard
-                      key={park.title}
+                      key={park.id}
                       title={park.title}
                       description={park.description}
                       imageUrl={park.image}
