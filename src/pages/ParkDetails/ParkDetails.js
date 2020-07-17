@@ -85,9 +85,8 @@ export default function ParkDetails() {
     dispatch(fetchParks());
     dispatch(fetchReviews(id));
     fetchPhotos("image", setImageUrl);
-    console.log("useEffect fired");
-    console.log("currentReviews:", currentReviews);
-    console.log("reviews:", currentReviews);
+
+    // eslint-disable-next-line
   }, [dispatch]);
 
   //upload picture
