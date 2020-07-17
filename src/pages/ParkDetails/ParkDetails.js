@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 import {
   Form,
   Col,
@@ -367,10 +368,7 @@ export default function ParkDetails() {
                     }}
                   />
                 )}
-
-                <h5>
-                  By {review.userName} on {review.updatedAt}
-                </h5>
+                <h5>By {review.userName} on {moment(review.updatedAt).format("DD-MM-YYYY")}</h5>
                 {"★".repeat(review.stars)}
                 <p>{review.description}</p>
               </div>
