@@ -171,12 +171,12 @@ export default function ParkDetails() {
                 className="image col-8"
                 fluid
               />
-              <p className="col-4">
+              <div className="col-4">
                 <p> {currentPark.description}</p>
                 <Button onClick={report} disabled={reported}>
                   Report
                 </Button>
-              </p>
+              </div>
             </Row>
           </div>
         ) : (
