@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './PreviewCard.css'
 
 //redux store
 import { fetchLikes, toggleLike } from "../../store/likes/actions";
@@ -82,13 +83,13 @@ export default function PreviewCard(props) {
         </Link>
 
         <Card.Subtitle className="mb-2 text-muted">
-          <span role="img" aria-label="heart">
+          <span className="stars" role="img" aria-label="heart">
             {countLikes(props.id)} 💚 {likesNr}
           </span>
+          <span className="rating">{meanRating()}</span>
         </Card.Subtitle>
         <Card.Text>
           {props.description} <br />
-          {meanRating()}
         </Card.Text>
       </Card.Body>
     </Card>
