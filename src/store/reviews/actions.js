@@ -21,7 +21,7 @@ export const newReview = (description, name, stars, parkId, imageUrl) => {
       }
     );
     //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    console.log("respone from posting review", response.data)
+    console.log("respone from posting review", response.data);
     dispatch(reviewPostSucces(response.data));
   };
 };
@@ -42,7 +42,7 @@ export const fetchReviewsSuccess = (reviews) => ({
   payload: reviews,
 });
 
-export const updateReview = (description, name, stars, parkId, imageUrl) => {
+export const updateReview = (description, name, stars, reviewId, imageUrl) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     //dispatch(appLoading())
@@ -52,7 +52,7 @@ export const updateReview = (description, name, stars, parkId, imageUrl) => {
         name,
         description,
         stars,
-        parkId,
+        id: reviewId,
         imageUrl,
       },
       {
@@ -60,6 +60,6 @@ export const updateReview = (description, name, stars, parkId, imageUrl) => {
       }
     );
     //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    dispatch(reviewPostSucces(response.data.newPark));
+    // dispatch(reviewPostSucces(response.data));
   };
 };

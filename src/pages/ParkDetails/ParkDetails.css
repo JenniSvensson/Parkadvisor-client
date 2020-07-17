@@ -1,3 +1,15 @@
 image {
-    width: 200px;
+  width: 200px;
+}
+
+.parkDetails img {
+  width: 50vw;
+}
+
+.parkDetails h1 {
+  margin: 40px 0 20px 0;
+}
+
+.parkDetails .col-4 {
+  margin: 20px 0;
 }
