@@ -45,7 +45,7 @@ export const updateReview = (description, name, stars, reviewId, imageUrl) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     //dispatch(appLoading())
-    await axios.patch(
+    const response = await axios.patch(
       `${apiUrl}/review`,
       {
         name,
@@ -58,7 +58,13 @@ export const updateReview = (description, name, stars, reviewId, imageUrl) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    //dispatch(showMessageWithTimeout("succes", false, response.data.message, 3000));
-    // dispatch(reviewPostSucces(response.data));
+    console.log("responseeee:", response)
+    dispatch(reviewUpdated(response));
   };
 };
+
+export const reviewUpdated = (review) => ({
+
+  type: "UPDATE_REVIEW_SUCCESS",
+  payload: review,
+});
