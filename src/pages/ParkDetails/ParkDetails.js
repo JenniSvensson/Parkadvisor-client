@@ -270,92 +270,7 @@ export default function ParkDetails() {
                     Edit review
                   </Button>
                 )}
-                {showForm && (
-                  <Form onSubmit={handleSubmitUpdate}>
-                    <CloudinaryContext cloudName="parkadvisor">
-                      <Form.Group controlId="formBasicname">
-                        <Form.Label>name</Form.Label>
-                        <Form.Control
-                          onChange={(e) => setNameUpdate(e.target.value)}
-                          type="text"
-                          name="name"
-                          value={nameUpdate}
-                          placeholder="Enter name"
-                        />
-                      </Form.Group>
 
-                      <Form.Group
-                        onChange={(e) => setStarsUpdate(e.target.value)}
-                        controlId="formBasicStars"
-                      >
-                        <Form.Label>Add a rating</Form.Label>
-                        <Form.Check
-                          name="stars"
-                          value="1"
-                          type="radio"
-                          label="1"
-                        />
-                        <Form.Check
-                          name="stars"
-                          value="2"
-                          type="radio"
-                          label="2"
-                        />
-                        <Form.Check
-                          name="stars"
-                          value="3"
-                          type="radio"
-                          label="3"
-                        />
-                        <Form.Check
-                          name="stars"
-                          value="4"
-                          type="radio"
-                          label="4"
-                        />
-                        <Form.Check
-                          name="stars"
-                          value="5"
-                          type="radio"
-                          label="5"
-                        />
-                      </Form.Group>
-
-                      <Form.Group controlId="formBasicComment">
-                        <Form.Label>Leave a review</Form.Label>
-                        <Form.Control
-                          onChange={(e) => setDescriptionUpdate(e.target.value)}
-                          type="text"
-                          name="review-text"
-                          value={descriptionUpdate}
-                          placeholder="Enter comment"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formBasicImageUrl">
-                        <Form.Label>Image (1)</Form.Label>
-                        <Row>
-                          <Button onClick={() => beginUploadUpdate()}>
-                            Upload Image
-                          </Button>
-                        </Row>
-                        {imageUrlUpdate && (
-                          <Image
-                            src={imageUrlUpdate}
-                            className="img-responsive"
-                            style={{
-                              maxHeight: "25vh",
-                              maxWidth: "35vw",
-                              padding: "10px 0",
-                            }}
-                          />
-                        )}
-                      </Form.Group>
-                      <Button type="submit" value="submit">
-                        Submit
-                      </Button>
-                    </CloudinaryContext>
-                  </Form>
-                )}
                 <h2>{review.name}</h2>
                 {review.imageUrl && (
                   <Image
@@ -378,6 +293,67 @@ export default function ParkDetails() {
             );
           })}
         </Col>
+        {showForm && (
+          <Form onSubmit={handleSubmitUpdate}>
+            <CloudinaryContext cloudName="parkadvisor">
+              <Form.Group controlId="formBasicname">
+                <Form.Label>name</Form.Label>
+                <Form.Control
+                  onChange={(e) => setNameUpdate(e.target.value)}
+                  type="text"
+                  name="name"
+                  value={nameUpdate}
+                  placeholder="Enter name"
+                />
+              </Form.Group>
+
+              <Form.Group
+                onChange={(e) => setStarsUpdate(e.target.value)}
+                controlId="formBasicStars"
+              >
+                <Form.Label>Add a rating</Form.Label>
+                <Form.Check name="stars" value="1" type="radio" label="1" />
+                <Form.Check name="stars" value="2" type="radio" label="2" />
+                <Form.Check name="stars" value="3" type="radio" label="3" />
+                <Form.Check name="stars" value="4" type="radio" label="4" />
+                <Form.Check name="stars" value="5" type="radio" label="5" />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicComment">
+                <Form.Label>Leave a review</Form.Label>
+                <Form.Control
+                  onChange={(e) => setDescriptionUpdate(e.target.value)}
+                  type="text"
+                  name="review-text"
+                  value={descriptionUpdate}
+                  placeholder="Enter comment"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicImageUrl">
+                <Form.Label>Image (1)</Form.Label>
+                <Row>
+                  <Button onClick={() => beginUploadUpdate()}>
+                    Upload Image
+                  </Button>
+                </Row>
+                {imageUrlUpdate && (
+                  <Image
+                    src={imageUrlUpdate}
+                    className="img-responsive"
+                    style={{
+                      maxHeight: "25vh",
+                      maxWidth: "35vw",
+                      padding: "10px 0",
+                    }}
+                  />
+                )}
+              </Form.Group>
+              <Button type="submit" value="submit">
+                Submit
+              </Button>
+            </CloudinaryContext>
+          </Form>
+        )}
       </Container>
     </div>
   );
