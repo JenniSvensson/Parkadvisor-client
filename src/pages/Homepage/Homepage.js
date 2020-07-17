@@ -7,10 +7,12 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+
 
 //Redux
 import { selectParks } from "../../store/parks/selectors";
-import { fetchParks } from "../../store/parks/actions";
+import { fetchParks, fetchMoreParks } from "../../store/parks/actions";
 
 export default function Homepage() {
   const [search, setSearch] = useState("");
@@ -21,6 +23,8 @@ export default function Homepage() {
   useEffect(() => {
     dispatch(fetchParks());
   }, [dispatch]);
+
+  useBottomScrollListener(() => dispatch(fetchMoreParks()));
 
   //search by country, park title
 
