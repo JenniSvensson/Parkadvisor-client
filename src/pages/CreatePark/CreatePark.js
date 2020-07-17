@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Image } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Image,
+  Jumbotron,
+  Col,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react";
 import { useHistory } from "react-router-dom";
@@ -65,81 +73,90 @@ export default function CreatePark() {
 
   return (
     <div>
+      <Jumbotron>
+        <Container>
+          <h1>Add a park</h1>{" "}
+        </Container>
+      </Jumbotron>
       <Container>
-        <h1>Add a park</h1>
-        <CloudinaryContext cloudName="parkadvisor">
-          <Form.Group controlId="formBasicTitle">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              onChange={(event) => setTitle(event.target.value)}
-              type="text"
-              name="title"
-              value={title}
-              placeholder="Enter title"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              name="description"
-              type="text"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              placeholder="Enter description"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicImageUrl">
-            <Form.Label>Image (1)</Form.Label>
-            <Row>
-              <Button onClick={() => beginUpload()}>Upload Image</Button>
-            </Row>
-            {imageUrl && (
-              <Image
-                src={imageUrl}
-                className="img-responsive"
-                style={{
-                  maxHeight: "25vh",
-                  maxWidth: "35vw",
-                  padding: "10px 0",
-                }}
+        <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-4">
+          <CloudinaryContext cloudName="parkadvisor">
+            <Form.Group controlId="formBasicTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                onChange={(event) => setTitle(event.target.value)}
+                type="text"
+                name="title"
+                value={title}
+                placeholder="Enter title"
               />
-            )}
-          </Form.Group>
+            </Form.Group>
 
-          <Form.Group controlId="formBasicCountry">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              name="country"
-              type="text"
-              value={country}
-              onChange={(event) => setCountry(event.target.value)}
-              placeholder="Enter country"
-            />
-          </Form.Group>
+            <Form.Group controlId="formBasicDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                name="description"
+                type="text"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                placeholder="Enter description"
+              />
+            </Form.Group>
 
-          <Form.Group
-            onChange={(e) => {
-              setType(e.target.value);
-            }}
-            controlId="formBasicCheckbox"
-          >
-            <Form.Label>Type</Form.Label>
-            <Form.Check name="type" value="flat" type="radio" label="Flat" />
-            <Form.Check
-              name="type"
-              value="mountain"
-              type="radio"
-              label="Mountain"
-            />
-            <Form.Check name="type" value="lake" type="radio" label="Lake" />
-          </Form.Group>
+            <Form.Group controlId="formBasicImageUrl">
+              <Form.Label>Image (1)</Form.Label>
+              <Button
+                onClick={() => beginUpload()}
+                style={{ marginLeft: "10px" }}
+              >
+                Upload Image
+              </Button>
+              {imageUrl && (
+                <Image
+                  src={imageUrl}
+                  className="img-responsive"
+                  style={{
+                    maxHeight: "25vh",
+                    maxWidth: "35vw",
+                    padding: "10px 0",
+                  }}
+                />
+              )}
+            </Form.Group>
 
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </CloudinaryContext>
+            <Form.Group controlId="formBasicCountry">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                name="country"
+                type="text"
+                value={country}
+                onChange={(event) => setCountry(event.target.value)}
+                placeholder="Enter country"
+              />
+            </Form.Group>
+
+            <Form.Group
+              onChange={(e) => {
+                setType(e.target.value);
+              }}
+              controlId="formBasicCheckbox"
+            >
+              <Form.Label>Type</Form.Label>
+              <Form.Check name="type" value="flat" type="radio" label="Flat" />
+              <Form.Check
+                name="type"
+                value="mountain"
+                type="radio"
+                label="Mountain"
+              />
+              <Form.Check name="type" value="lake" type="radio" label="Lake" />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </CloudinaryContext>
+        </Form>
       </Container>
     </div>
   );
