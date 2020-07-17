@@ -25,7 +25,7 @@ import { CloudinaryContext } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../config/CloudinaryService";
 import { showMessageWithTimeout } from "../../store/appState/actions";
 import { selectToken, selectUser } from "../../store/user/selectors";
-
+import "./ParkDetails.css";
 export default function ParkDetails() {
   const [description, setDescription] = useState();
   const [name, setName] = useState();
@@ -86,11 +86,10 @@ export default function ParkDetails() {
     dispatch(fetchParks());
     dispatch(fetchReviews(id));
     fetchPhotos("image", setImageUrl);
-    console.log("useEffect fired")
-    console.log("currentReviews:", currentReviews)
-    console.log("reviews:", currentReviews)
+    console.log("useEffect fired");
+    console.log("currentReviews:", currentReviews);
+    console.log("reviews:", currentReviews);
   }, [dispatch]);
-
 
   //upload picture
   const beginUpload = (tag) => {
@@ -146,41 +145,44 @@ export default function ParkDetails() {
   }
 
   const submittedEarlier = () => {
-    let x = false
-    currentReviews.forEach(review => {
+    let x = false;
+    currentReviews.forEach((review) => {
       if (review.userId === user.id && user.id > 4) {
-        console.log("you already submitted a review")
-        x = true
+        console.log("you already submitted a review");
+        x = true;
       }
-    }
-    )
-    return x
-  }
+    });
+    return x;
+  };
 
   return (
     <div className="parkDetails">
       <Container>
-        <Row>
-          {currentPark ? (
-            <div>
-              <Button onClick={report} disabled={reported}>
-                Report
-              </Button>
-              <h1>
-                {currentPark.title}
-                <h6>Country: {currentPark.country}</h6>
+        {currentPark ? (
+          <div>
+            <h1>
+              {currentPark.title}
+              {"  "}
+              {meanRating()}
+            </h1>
+            <Row>
+              <Image
+                src={`${currentPark.image}`}
+                className="image col-8"
+                fluid
+              />
+              <p className="col-4">
+                <p> {currentPark.description}</p>
+                <Button onClick={report} disabled={reported}>
+                  Report
+                </Button>
+              </p>
+            </Row>
+          </div>
+        ) : (
+          <p>Loading</p>
+        )}
 
-                <h6>Type:{currentPark.type}</h6>
-
-                {meanRating()}
-              </h1>
-              <Image src={`${currentPark.image}`} className="image" fluid />
-              <p>{currentPark.description}</p>
-            </div>
-          ) : (
-            <p>Loading</p>
-          )}
-        </Row>
         <Row>
           {token && !submitted && !submittedEarlier() ? (
             <Form onSubmit={handleSubmit}>
