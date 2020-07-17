@@ -50,7 +50,7 @@ export default function ParkDetails() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(newReview(description, name, stars, reviewId, imageUrl));
+    dispatch(newReview(description, name, stars, id, imageUrl));
     //reset form
     setDescription("");
     setName("");
@@ -368,7 +368,10 @@ export default function ParkDetails() {
                     }}
                   />
                 )}
-                <h5>By {review.userName} on {moment(review.updatedAt).format("DD-MM-YYYY")}</h5>
+                <h5>
+                  By {review.userName} on{" "}
+                  {moment(review.updatedAt).format("DD-MM-YYYY")}
+                </h5>
                 {"★".repeat(review.stars)}
                 <p>{review.description}</p>
               </div>
