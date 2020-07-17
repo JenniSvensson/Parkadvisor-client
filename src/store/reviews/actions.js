@@ -1,7 +1,6 @@
 import axios from "axios";
 import { selectUser } from "../user/selectors";
 import { apiUrl } from "../../config/constants";
-import { setMessage } from "../appState/actions";
 
 export const newReview = (description, name, stars, parkId, imageUrl) => {
   return async (dispatch, getState) => {
@@ -46,7 +45,7 @@ export const updateReview = (description, name, stars, reviewId, imageUrl) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     //dispatch(appLoading())
-    const response = await axios.patch(
+    await axios.patch(
       `${apiUrl}/review`,
       {
         name,

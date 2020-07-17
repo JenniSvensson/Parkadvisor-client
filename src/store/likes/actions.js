@@ -36,7 +36,7 @@ export const toggleLike = (parkId, isLiked) => {
         );
         dispatch(newLike([res.data]));
       } else if (isLiked) {
-        const res = await axios.delete(`${apiUrl}/like/remove/${isLiked.id}`, {
+        await axios.delete(`${apiUrl}/like/remove/${isLiked.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

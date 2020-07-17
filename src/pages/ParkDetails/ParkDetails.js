@@ -9,7 +9,6 @@ import {
   Button,
   Container,
   Image,
-  Popovername,
 } from "react-bootstrap";
 import { selectParkById } from "../../store/parks/selectors";
 import { fetchParks, reportPark } from "../../store/parks/actions";
@@ -19,7 +18,6 @@ import {
   updateReview,
 } from "../../store/reviews/actions";
 import {
-  selectReviews,
   selectReviewsById,
 } from "../../store/reviews/selectors";
 import { CloudinaryContext } from "cloudinary-react";
@@ -181,8 +179,8 @@ export default function ParkDetails() {
             </Row>
           </div>
         ) : (
-          <p>Loading</p>
-        )}
+            <p>Loading</p>
+          )}
 
         <Row>
           {token && !submitted && !submittedEarlier() ? (
@@ -247,8 +245,8 @@ export default function ParkDetails() {
           ) : !token ? (
             "Log in to post review"
           ) : (
-            "You submitted a review for this park"
-          )}
+                "You submitted a review for this park"
+              )}
         </Row>
         <Col>
           <h1>Reviews({currentReviews.length})</h1>
