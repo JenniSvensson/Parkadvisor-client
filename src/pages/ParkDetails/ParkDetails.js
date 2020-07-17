@@ -187,14 +187,15 @@ export default function ParkDetails() {
           {token && !submitted && !submittedEarlier() ? (
             <Form onSubmit={handleSubmit}>
               <CloudinaryContext cloudName="parkadvisor">
+                <h2 className="mt-3 mb-2">Leave a review</h2>
                 <Form.Group controlId="formBasicname">
-                  <Form.Label>name</Form.Label>
+                  <Form.Label>Title</Form.Label>
                   <Form.Control
                     onChange={(e) => setName(e.target.value)}
                     type="text"
                     name="name"
                     value={name}
-                    placeholder="Enter name"
+                    placeholder="Enter title"
                   />
                 </Form.Group>
 
@@ -211,7 +212,7 @@ export default function ParkDetails() {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicComment">
-                  <Form.Label>Leave a review</Form.Label>
+                  <Form.Label>Leave a comment</Form.Label>
                   <Form.Control
                     onChange={(e) => setDescription(e.target.value)}
                     type="text"
