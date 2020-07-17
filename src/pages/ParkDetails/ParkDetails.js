@@ -64,15 +64,7 @@ export default function ParkDetails() {
     console.log("useEffect fired")
     console.log("currentReviews:", currentReviews)
     console.log("reviews:", currentReviews)
-    currentReviews.forEach(review => {
-      console.log("review")
-      if (review.userId === user.id) {
-        console.log("you already submitted a review")
-        setSubmitted(true)
-      }
-    }
-    )
-  }, [dispatch, submitted]);
+  }, [dispatch]);
 
   //upload picture
   const beginUpload = (tag) => {
@@ -99,6 +91,18 @@ export default function ParkDetails() {
     setReported(true)
   }
 
+  const submittedEarlier = () => {
+    let x = false
+    currentReviews.forEach(review => {
+      if (review.userId === user.id && user.id > 4) {
+        console.log("you already submitted a review")
+        x = true
+      }
+    }
+    )
+    return x
+  }
+
   return (
     <div className="parkDetails">
       <Container>
@@ -117,7 +121,7 @@ export default function ParkDetails() {
             )}
         </Row>
         <Row>
-          {token && !submitted ? (
+          {token && !submitted && !submittedEarlier() ? (
             <Form onSubmit={handleSubmit}>
               <CloudinaryContext cloudName="parkadvisor">
                 <Form.Group controlId="formBasicTitle">
