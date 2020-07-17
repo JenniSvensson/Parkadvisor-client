@@ -32,6 +32,7 @@ export const fetchMoreParksSuccess = (parks) => ({
 });
 
 //ADD PARK
+
 export function addPark(title, description, imageUrl, country, type, user) {
   return async function thunk(dispatch, getState) {
     const user = getState().user;
@@ -52,6 +53,7 @@ export function addPark(title, description, imageUrl, country, type, user) {
 
     dispatch(showMessageWithTimeout("success", true, "Park have been created"));
   };
+
 }
 
 //REPORT A PARK
