@@ -26,9 +26,9 @@ export default function Homepage() {
 
   let parksToDisplay;
 
-  if (country) {
+  if (country && !search) {
     parksToDisplay = parks.filter((park) => park.country.includes(country));
-  } else if (search) {
+  } else if (search && !country) {
     parksToDisplay = parks.filter((park) =>
       park.title.toLowerCase().includes(search)
     );
