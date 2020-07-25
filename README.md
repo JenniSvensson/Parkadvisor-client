@@ -40,11 +40,11 @@ This project was a collaboration between [Max Guiking](https://github.com/Rosset
 
 ## Wireframe
 
-![wireframe]()
+![wireframe](https://github.com/JenniSvensson/Parkadvisor-client/blob/Development/readmePictures/wireframe.png)
 
 ## Datamodel
 
-![datamodel]()
+![datamodel](https://github.com/JenniSvensson/Parkadvisor-client/blob/Development/readmePictures/datamodel.png)
 
 ## Server repo
 
