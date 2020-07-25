@@ -1,42 +1,51 @@
-# Frontend template
+[Deployed version here](https://dazzling-bartik-ef9472.netlify.app/)
 
-This is a simple react/redux/jwt template to start a project quickly
+## ParkAdvisor
 
-## Table of contents:
+Parkadvisor is a national park review platform for discovering parks from all around the world.
+A user can:
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
+- Filter by country and search for a park by name.
+- See a full list of all the parks.
+- Leave a heart on each park.
+- Report a park.
+- Leave/edit a review that contains a rating, text and a picture.
+- Create a new park with an image upload feature.
 
-## SETUP How to use this template
+This project was a collaboration between [Max Guiking](https://github.com/Rossetag), [Paula Morales](https://github.com/paula-morales) and [Jenni Svensson](https://github.com/JenniSvensson)
 
-1. Create a new project based on this template using the `Use this template` button
+## Goals for this project
 
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
+- Practice collaborating, Github brancing and avoiding merge conflicts.
+- Build a full-stack application using technologies and tools learned during the bootcamp.
 
-2. Clone the app
+## Technologies and tools used:
 
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
+- React
+- Redux
+- React-bootstrap
+- Cloudinary
+- Axios
+- Express
+- Sequelize
 
-3. cd into your project
+## User Stories
 
-```
-cd YOUR_PROJECT_NAME
-```
+- As a user I want to be able to search parks by country and by name.
+- As a logged in user I want to edit my review.
+- As a logged in user, I want to be able to leave a rating, just by stars or write something.
+- As a user I want to be able to click on a park to see it's details and ratings.
+- As a user I want to report a park, for example if it's a duplicate. With enough reports it will be deleted automatically.
+- As a user I want to be able to see all the parks and their rating.
 
-4. install dependencies
+## Wireframe
 
-```
-npm install
-```
+![wireframe]()
 
-5. Start development server with npm start
+## Datamodel
 
-```
-npm start
-```
+![datamodel]()
 
-## CRA docs
+## Server repo
 
-The normal Create React App docs can be found in [CRA_DOCS.md](./CRA_DOCS.md)
+The server side repo can be found [here](https://github.com/JenniSvensson/Parkadvisor-server)
