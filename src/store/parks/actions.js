@@ -1,12 +1,14 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import { showMessageWithTimeout } from "../appState/actions";
+import { showMessageWithTimeout,appLoading, appDoneLoading } from "../appState/actions";
 
 //FETCH PARKS
 export const fetchParks = () => {
   return async (dispatch, getState) => {
+    dispatch(appLoading());
     const response = await axios.get(`${apiUrl}/park`);
     //console.log("Fetched parks:", response.data.rows);
+    dispatch(appDoneLoading());
     dispatch(fetchParksSuccess(response.data.rows));
   };
 };
