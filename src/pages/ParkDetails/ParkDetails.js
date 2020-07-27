@@ -24,7 +24,11 @@ import { CloudinaryContext } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../config/CloudinaryService";
 import { showMessageWithTimeout } from "../../store/appState/actions";
 import { selectToken, selectUser } from "../../store/user/selectors";
+import { selectLikes } from "../../store/likes/selectors";
+import { toggleLike } from "../../store/likes/actions";
+
 import "./ParkDetails.css";
+
 export default function ParkDetails() {
   const [description, setDescription] = useState();
   const [name, setName] = useState();
@@ -45,6 +49,8 @@ export default function ParkDetails() {
   const currentPark = useSelector(selectParkById(id));
   const currentReviews = useSelector(selectReviewsById(id));
   const user = useSelector(selectUser);
+  const likes = useSelector(selectLikes);
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -146,12 +152,30 @@ export default function ParkDetails() {
     let x = false;
     currentReviews.forEach((review) => {
       if (review.userId === user.id && user.id > 4) {
-        console.log("you already submitted a review");
+        console.log("You already submitted a review");
         x = true;
       }
     });
     return x;
   };
+
+    //check likes of user logged in
+    let likesByUser;
+    if (likes && user) {
+      likesByUser = likes.filter((like) => like.userId === user.id);
+    }
+  
+    //add or remove like
+    const handlerClick = (e) => {
+      e.preventDefault();
+      const parkId = parseInt(e.target.value);
+      if (!token) {
+        dispatch(showMessageWithTimeout("danger", true, "Something went wrong"));
+      } else {
+        const isLiked = likesByUser.find((like) => like.parkId === parkId);
+        dispatch(toggleLike(parkId, isLiked));
+      }
+    };
 
   return (
     <div className="parkDetails">
@@ -171,6 +195,19 @@ export default function ParkDetails() {
               />
               <div className="col-4">
                 <p> {currentPark.description}</p>
+                {token && (
+                  <Button
+                    onClick={handlerClick}
+                    value={id}
+                    variant="outline-primary"
+                  >
+                    {likesByUser
+                      ? likesByUser.find((like) => like.parkId === parseInt(id))
+                        ? "♥"
+                        : "♡"
+                      : null}
+                  </Button>
+                )}
                 <Button onClick={report} disabled={reported}>
                   Report
                 </Button>

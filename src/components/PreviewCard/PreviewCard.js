@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import './PreviewCard.css'
 
 //redux store
-import { fetchLikes, toggleLike } from "../../store/likes/actions";
+import { fetchLikes } from "../../store/likes/actions";
 import { selectLikes } from "../../store/likes/selectors";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import { showMessageWithTimeout } from "../../store/appState/actions";
@@ -43,30 +43,15 @@ export default function PreviewCard(props) {
     }
   };
 
-  //check likes of user logged in
-  let likesByUser;
-  if (likes && user) {
-    likesByUser = likes.filter((like) => like.userId === user.id);
-  }
-
-  //add or remove like
-  const handlerClick = (e) => {
-    e.preventDefault();
-    const parkId = parseInt(e.target.value);
-    if (!token) {
-      dispatch(showMessageWithTimeout("danger", true, "Something went wrong"));
-    } else {
-      const isLiked = likesByUser.find((like) => like.parkId === parkId);
-      dispatch(toggleLike(parkId, isLiked));
-    }
-  };
-
   return (
-    <Card style={{ 
+    <Card 
+    //border="succes"
+    style={{ 
     width: "25rem", 
     height: "25rem",
     overflow: "hidden",
-    }}>
+    }}
+    >
       <Card.Img 
         variant="top" 
         src={props.imageUrl} 
@@ -75,19 +60,6 @@ export default function PreviewCard(props) {
           overflow: "hidden",
           }}
           />{" "}
-      {token && (
-        <Button
-          onClick={handlerClick}
-          value={props.id}
-          variant="outline-primary"
-        >
-          {likesByUser
-            ? likesByUser.find((like) => like.parkId === props.id)
-              ? "♥"
-              : "♡"
-            : null}
-        </Button>
-      )}
       <Card.Body>
         <Link to={`/park/${props.id}`}>
           <Card.Title>{props.title} </Card.Title>
