@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
-import Spinner from 'react-bootstrap/Spinner'
 
 //Redux
 import { selectParks } from "../../store/parks/selectors";

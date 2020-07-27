@@ -62,8 +62,19 @@ export default function PreviewCard(props) {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={props.imageUrl} />{" "}
+    <Card style={{ 
+    width: "25rem", 
+    height: "25rem",
+    overflow: "hidden",
+    }}>
+      <Card.Img 
+        variant="top" 
+        src={props.imageUrl} 
+        style={{ 
+          height: "15rem",
+          overflow: "hidden",
+          }}
+          />{" "}
       {token && (
         <Button
           onClick={handlerClick}
