@@ -7,7 +7,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
 
 //Redux
 import { selectParks } from "../../store/parks/selectors";
@@ -82,30 +82,31 @@ export default function Homepage() {
                   ))}
                 </Form.Control>
               </Form>
-            </Col>{" "}
+            </Col>
           </Row>
         </Container>
       </Jumbotron>
       <Container>
         <Row>
           <CardColumns>
-            { parksToDisplay.map((park) => {
-                if (!park.hidden) {
-                  return (
-                    <PreviewCard
-                      key={park.id}
-                      title={park.title}
-                      description={park.description}
-                      imageUrl={park.image}
-                      country={park.country}
-                      type={park.type}
-                      id={park.id}
-                      reviews={park.reviews}
-                    />
-                  );
-                }
-              })}
-          </CardColumns>{" "}
+            {parksToDisplay.map((park) => {
+              if (!park.hidden) {
+                return (
+                  <PreviewCard
+                    key={park.id}
+                    title={park.title}
+                    description={park.description}
+                    imageUrl={park.image}
+                    country={park.country}
+                    type={park.type}
+                    id={park.id}
+                    reviews={park.reviews}
+                  />
+                );
+              }
+              return <div></div>;
+            })}
+          </CardColumns>
         </Row>
       </Container>
     </div>
