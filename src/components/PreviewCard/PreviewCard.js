@@ -1,21 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import './PreviewCard.css'
+import "./PreviewCard.css";
 
 //redux store
 import { fetchLikes } from "../../store/likes/actions";
 import { selectLikes } from "../../store/likes/selectors";
-import { selectToken, selectUser } from "../../store/user/selectors";
-import { showMessageWithTimeout } from "../../store/appState/actions";
 
 export default function PreviewCard(props) {
   const dispatch = useDispatch();
   const likes = useSelector(selectLikes);
-  const token = useSelector(selectToken);
-  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchLikes());
@@ -44,22 +39,22 @@ export default function PreviewCard(props) {
   };
 
   return (
-    <Card 
-    //border="succes"
-    style={{ 
-    width: "25rem", 
-    height: "25rem",
-    overflow: "hidden",
-    }}
+    <Card
+      //border="succes"
+      style={{
+        width: "25rem",
+        height: "25rem",
+        overflow: "hidden",
+      }}
     >
-      <Card.Img 
-        variant="top" 
-        src={props.imageUrl} 
-        style={{ 
+      <Card.Img
+        variant="top"
+        src={props.imageUrl}
+        style={{
           height: "15rem",
           overflow: "hidden",
-          }}
-          />{" "}
+        }}
+      />{" "}
       <Card.Body>
         <Link to={`/park/${props.id}`}>
           <Card.Title>{props.title} </Card.Title>
