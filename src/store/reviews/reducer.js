@@ -8,6 +8,9 @@ export default (state = initialState, action) => {
     case "FETCH_REVIEWS_SUCCESS":
       return action.payload;
 
+    case "UPDATE_REVIEW_SUCCESS":
+      return [...state, action.payload]
+
     default:
       return state;
   }
